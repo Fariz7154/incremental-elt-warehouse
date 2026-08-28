@@ -1,5 +1,7 @@
 # Incremental ELT Warehouse
 
+[![ci](https://github.com/Fariz7154/incremental-elt-warehouse/actions/workflows/ci.yml/badge.svg)](https://github.com/Fariz7154/incremental-elt-warehouse/actions/workflows/ci.yml)
+
 A dimensional warehouse loaded incrementally: watermark-based extraction with a
 lookback window, SCD Type 2 history on the customer dimension, idempotent fact
 loading, and validation that the history is actually well-formed after every run.
