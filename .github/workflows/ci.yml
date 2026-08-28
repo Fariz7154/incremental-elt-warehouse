@@ -1,0 +1,26 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Unit and integration tests
+        run: PYTHONPATH=src:tests pytest tests -q
+      - name: Full demo cycle
+        run: |
+          export PYTHONPATH=src
+          python -m warehouse.cli seed
+          python -m warehouse.cli load
+          python -m warehouse.cli change
+          python -m warehouse.cli load
+          python -m warehouse.cli inspect
